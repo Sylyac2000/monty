@@ -14,7 +14,7 @@ void process_monty(char *filename, stack_t **stack)
 	int line_count = 1;
 	instruct_func s;
 	int check;
-	int read;
+	ssize_t read;
 	FILE *file = fopen(filename, "r");
 
 	if (file == NULL)
@@ -34,7 +34,7 @@ void process_monty(char *filename, stack_t **stack)
 		if (s == NULL)
 		{
 			printf("L%d: unknown instruction %s\n", line_count, line);
-			exit(EXIT_FAILURE);
+			error_exitandclean(stack);
 		}
 		s(stack, line_count);
 		line_count++;
